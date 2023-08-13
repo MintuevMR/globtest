@@ -1,0 +1,39 @@
+.card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 360px;
+  height: 320px;
+  padding: 24px;
+  background-color: #fff;
+  gap: 24px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+  transition: all linear 0.25s;
+}
+
+.card:hover {
+  box-shadow: 0px 0px 20px 0px rgba(15, 23, 122, 1.1);
+}
+
+.card .title {
+  color: var(--plumbum, #262c40);
+  text-align: center;
+  font-family: Proxima Nova;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+}
+
+.card .contact {
+  display: flex;
+  align-items: center;
+  color: #8189a3;
+}
+.contact img {
+  margin-right: 10px;
+}
