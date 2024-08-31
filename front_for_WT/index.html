@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>
+             <td class="tableRowEven"><b>ФИО Сотрудника</b></td>
+        </tr>
+   
+        <%
+             arr = XQuery("for $elem in collaborators return $elem");
+             for (i in arr)
+             {
+        %>
+   
+        <tr>
+             <td class="tableRowOdd"><%=i.fullname%></td>
+        </tr>
+      
+        <%
+             }
+        %>
+   
+   </table>
+</body>
+</html>
