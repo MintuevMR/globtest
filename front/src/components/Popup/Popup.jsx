@@ -38,7 +38,7 @@ export const Popup = ({ user, closePopup }) => {
             <span>{user.department}</span>
           </div>
         </div>
-        <div>
+        <div className="cardFooter">
           <h3>Дополнительная информация:</h3>
           <span>
             Разработчики используют текст в качестве заполнителя макта страницы.

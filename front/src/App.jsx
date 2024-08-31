@@ -1,24 +1,34 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchUsers } from "./redux/slice";
-import { Popup } from "./components/Popup";
-import Card from "./components/Card";
+import { Popup } from "./components/Popup/Popup";
+import Card from "./components/Card/Card";
 import "./App.css";
+import MyLoader from "./components/Loader/Loader";
 
 function App() {
+  const load = useSelector((state) => state.users.loading);
   const users = useSelector((state) => state.users.users);
   const [inputValue, setInputValue] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
 
   const dispatch = useDispatch();
 
-  const filteredUsers = users.filter((user) =>
-    user.name.toLowerCase().includes(inputValue?.toLowerCase())
-  );
-
   useEffect(() => {
-    dispatch(fetchUsers());
-  }, []);
+    const delayDebounceFn = setTimeout(() => {
+      dispatch(fetchUsers(inputValue));
+    }, 1500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [inputValue, dispatch]);
+
+  // const filteredUsers = users.filter((user) =>
+  //   user.name.toLowerCase().includes(inputValue?.toLowerCase())
+  // ); // если будем делать живой поиск по массиву, который и так приходит с запросом fetchUsers.
+
+  // useEffect(() => {
+  //   dispatch(fetchUsers());
+  // }, []);
 
   const handleCardClick = (user) => {
     setSelectedUser(user);
@@ -35,7 +45,7 @@ function App() {
   };
 
   return (
-    <div onClick={handleBackgroundClick}>
+    <div onClick={handleBackgroundClick} className="content">
       <div className="formInput">
         <input
           type="text"
@@ -46,11 +56,16 @@ function App() {
         />
       </div>
       <main>
-        {filteredUsers.map((user, ind) => {
+        {load && <MyLoader />}
+        {!load &&
+          users.map((user, ind) => (
+            <Card key={ind} user={user} handleCardClick={handleCardClick} />
+          ))}
+        {/* {filteredUsers.map((user, ind) => {
           return (
             <Card key={ind} user={user} handleCardClick={handleCardClick}/>
           );
-        })}
+        })} */}
       </main>
       {selectedUser && (
         <Popup user={selectedUser} closePopup={handlePopupClose} />

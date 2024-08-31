@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   users: [],
@@ -8,11 +9,11 @@ const initialState = {
 
 export const fetchUsers = createAsyncThunk(
   "users/fetchUsers",
-  async (_, thunkAPI) => {
+  async (term = "", thunkAPI) => {
     try {
-      const res = await fetch("http://localhost:3000/");
-      const users = await res.json();
-      return users;
+      const url = term ? `http://localhost:3000/?term=${term}` : "http://localhost:3000/";
+      const res = await axios.get(url)
+      return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
