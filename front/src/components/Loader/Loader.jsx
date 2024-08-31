@@ -1,5 +1,5 @@
 
-import styles from './loader.css'
+import styles from "./loader.css?inline";
 
 const Loader = () => {
     return (

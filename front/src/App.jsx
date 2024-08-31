@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       dispatch(fetchUsers(inputValue));
-    }, 1500);
+    }, 500);
 
     return () => clearTimeout(delayDebounceFn);
   }, [inputValue, dispatch]);
